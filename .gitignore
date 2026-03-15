@@ -23,7 +23,7 @@ Thumbs.db
 hs_err_pid*
 
 # Environment / credentials
-src/main/resources/application.properties
+# src/main/resources/application.properties
 
 # Others
 dump/

@@ -21,7 +21,7 @@ public class UserService {
     @Transactional public User create(UserRequest request){ if(userRepository.existsByEmail(request.getEmail())) throw new EmailAlreadyUsedException("Email já cadastrado"); User user=new User(request.getName(), request.getEmail(), passwordEncoder.encode(request.getPassword())); return userRepository.save(user);} 
     public UserResponse getById(Long id){ return userRepository.findDtoById(id).orElseThrow(()-> new ResourceNotFoundException("Usuário não encontrado")); }
     public User getEntity(Long id){ return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Usuário não encontrado")); }
-    @Transactional public User update(Long id, UserUpdateRequest request){
+    @Transactional public User partialUpdate(Long id, UserUpdateRequest request){
         User user = getEntity(id);
         // Email
         if(request.getEmail()!=null && !request.getEmail().isBlank()){
@@ -37,6 +37,15 @@ public class UserService {
         if(request.getPassword()!=null && !request.getPassword().isBlank()){
             user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
+        return userRepository.save(user);
+    }
+    @Transactional public User fullUpdate(Long id, UserRequest request){
+        User user = getEntity(id);
+        if(!user.getEmail().equals(request.getEmail()) && userRepository.existsByEmail(request.getEmail()))
+            throw new EmailAlreadyUsedException("Email já cadastrado");
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(user);
     }
     @Transactional public void delete(Long id){ if(!userRepository.existsById(id)) throw new ResourceNotFoundException("Usuário não encontrado"); userRepository.deleteById(id);} 
