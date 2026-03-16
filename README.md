@@ -21,8 +21,8 @@ API REST em Spring Boot para registrar quantas vezes os usuários consumiram caf
 | DELETE | /users/{iduser} | Sim (próprio) | Remove usuário |
 | POST | /users/{iduser}/drink | Sim (próprio) | Registra consumo |
 | GET | /users/{iduser}/history?date=YYYY-MM-DD | Sim (próprio) | Histórico diário |
-| GET | /users/ranking/day?date=YYYY-MM-DD | Sim | Ranking por dia |
-| GET | /users/ranking/last?days=X | Sim | Ranking últimos X dias |
+| GET | /ranking/day?date=YYYY-MM-DD | Sim | Ranking por dia |
+| GET | /ranking/last?days=X | Sim | Ranking últimos X dias |
 
 Header de autorização:
 ```
@@ -102,7 +102,7 @@ curl -X POST http://localhost:8080/users/1/drink \
   -H "Authorization: Bearer <token>" \
   -H "Content-Type: application/json" \
   -d '{
-    "drink": "Expresso"
+    "drink": 1
   }'
 ```
 
