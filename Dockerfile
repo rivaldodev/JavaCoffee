@@ -17,7 +17,7 @@ FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
 # Copy the built jar from the build stage
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/coffee-tracker-api-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the application port
 EXPOSE 8080
