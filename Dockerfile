@@ -18,11 +18,6 @@ WORKDIR /app
 # Copy the built jar from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Set environment variables for Spring Boot
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/neondb
-ENV SPRING_DATASOURCE_USERNAME=neondb_owner
-ENV SPRING_DATASOURCE_PASSWORD=npg_Oab7fyhzJS3N
-
 # Expose the application port
 EXPOSE 8080
 
