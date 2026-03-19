@@ -6,7 +6,7 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY src ./src
-RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+RUN sed -i 's/\r$//' mvnw && chmod +x mvnw && ./mvnw clean package -DskipTests --no-transfer-progress
 
 # Stage 2: Run
 FROM eclipse-temurin:17-jre-jammy
