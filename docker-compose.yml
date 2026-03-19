@@ -3,5 +3,11 @@ services:
     build: .
     expose:
       - 8080
+    networks:
+      - coolify
     environment:
       - APP_JWT_SECRET=${APP_JWT_SECRET:-COLOQUE_AQUI_UM_SEGREDO_BASE64}
+
+networks:
+  coolify:
+    external: true
